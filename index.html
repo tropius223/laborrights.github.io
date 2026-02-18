@@ -141,7 +141,8 @@
             };
 
             return (
-                <div className="min-h-screen bg-slate-50 text-slate-900">
+                <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
+                    {/* Navigation */}
                     <nav className="fixed w-full bg-white/95 backdrop-blur-md z-50 border-b border-slate-200 shadow-sm">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="flex justify-between h-20">
@@ -158,12 +159,12 @@
                                             {item.name}
                                         </a>
                                     ))}
-                                    <a href="#report" className="bg-blue-900 text-white px-6 py-2.5 rounded-lg hover:bg-blue-800 transition-all">
+                                    <a href="#report" className="bg-blue-900 text-white px-6 py-2.5 rounded-lg hover:bg-blue-800 transition-all shadow-md active:scale-95">
                                         通報・相談窓口
                                     </a>
                                 </div>
                                 <div className="md:hidden flex items-center">
-                                    <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-slate-600 p-2">
+                                    <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-slate-600 p-2 focus:outline-none">
                                         {isMenuOpen ? <Icon name="X" /> : <Icon name="Menu" />}
                                     </button>
                                 </div>
@@ -172,7 +173,7 @@
                         {isMenuOpen && (
                             <div className="md:hidden bg-white border-b border-slate-200 py-4 px-6 space-y-4 shadow-xl">
                                 {navigation.map((item) => (
-                                    <a key={item.name} href={item.href} className="block text-base font-bold text-slate-700" onClick={() => setIsMenuOpen(false)}>
+                                    <a key={item.name} href={item.href} className="block text-base font-bold text-slate-700 hover:text-blue-900 py-2" onClick={() => setIsMenuOpen(false)}>
                                         {item.name}
                                     </a>
                                 ))}
@@ -180,43 +181,214 @@
                         )}
                     </nav>
 
+                    {/* Hero Section */}
                     <section id="home" className="pt-32 pb-20 lg:pt-56 lg:pb-40 bg-gradient-to-br from-slate-50 via-white to-blue-50">
-                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                            <h1 className="text-4xl md:text-7xl font-extrabold text-slate-900 mb-8 leading-tight">
-                                すべての労働者に、<br />
-                                <span className="text-blue-900">正当な権利</span>と安全を。
-                            </h1>
-                            <p className="text-lg md:text-xl text-slate-600 mb-12 max-w-2xl mx-auto">
-                                私たちは、アルバイトやパートを含むすべての働く人々の権利を守り、
-                                法令遵守が徹底された社会の実現を目指す独立組織です。
-                            </p>
-                            <div className="flex flex-col sm:flex-row justify-center gap-6">
-                                <a href="#report" className="bg-blue-900 text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-blue-800 shadow-xl">
-                                    労働実態を報告する
-                                </a>
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="text-center max-w-4xl mx-auto">
+                                <h1 className="text-4xl md:text-7xl font-extrabold text-slate-900 tracking-tight mb-8 leading-tight">
+                                    すべての労働者に、<br />
+                                    <span className="text-blue-900">正当な権利</span>と安全を。
+                                </h1>
+                                <p className="text-lg md:text-xl text-slate-600 mb-12 leading-relaxed max-w-2xl mx-auto">
+                                    私たちは、アルバイトやパートを含むすべての働く人々の権利を守り、
+                                    法令遵守（コンプライアンス）が徹底された社会の実現を目指す独立組織です。
+                                </p>
+                                <div className="flex flex-col sm:flex-row justify-center gap-6">
+                                    <a href="#report" className="bg-blue-900 text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-blue-800 transition-all shadow-2xl hover:-translate-y-1">
+                                        労働実態を報告する
+                                    </a>
+                                    <a href="#about" className="bg-white text-slate-700 border border-slate-200 px-10 py-5 rounded-2xl text-lg font-bold hover:bg-slate-50 transition-all shadow-sm">
+                                        活動理念について
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </section>
 
+                    {/* Features Section */}
                     <section id="about" className="py-32 bg-white">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="text-center mb-20">
-                                <h2 className="text-3xl md:text-4xl font-bold mb-6">活動内容</h2>
+                                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">当ネットワークの主要活動</h2>
+                                <p className="text-slate-500 max-w-2xl mx-auto">労働基準法の形骸化を防ぎ、実効性のある労働環境の改善を推進します。</p>
                             </div>
+                            
                             <div className="grid md:grid-cols-3 gap-8">
-                                {features.map((f) => (
-                                    <div key={f.title} className="p-10 bg-slate-50 rounded-3xl border border-slate-100">
-                                        <div className="text-blue-900 mb-6"><Icon name={f.icon} className="h-10 w-10" /></div>
-                                        <h3 className="text-2xl font-bold mb-4">{f.title}</h3>
-                                        <p className="text-slate-600 text-sm leading-relaxed">{f.description}</p>
+                                {features.map((feature) => (
+                                    <div key={feature.title} className="group p-10 bg-slate-50 rounded-3xl hover:bg-blue-900 hover:text-white transition-all duration-500 shadow-sm hover:shadow-2xl">
+                                        <div className="bg-blue-100 text-blue-900 w-14 h-14 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-blue-800 group-hover:text-white transition-colors">
+                                            <Icon name={feature.icon} className="h-7 w-7" />
+                                        </div>
+                                        <h3 className="text-2xl font-bold mb-6">{feature.title}</h3>
+                                        <p className="text-slate-600 group-hover:text-blue-100 leading-relaxed text-sm md:text-base">
+                                            {feature.description}
+                                        </p>
                                     </div>
                                 ))}
                             </div>
                         </div>
                     </section>
 
-                    <footer className="bg-slate-900 text-slate-400 py-20 text-center">
-                        <p className="text-xs">© 2026 全国労働権利保護ネットワーク (NLRPN).</p>
+                    {/* Law Info Section (New) */}
+                    <section id="laws" className="py-32 bg-slate-900 text-white overflow-hidden relative">
+                        <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-800/5 skew-x-12 translate-x-20"></div>
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                            <div className="grid lg:grid-cols-2 gap-20 items-center">
+                                <div>
+                                    <div className="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full bg-blue-900/50 border border-blue-700 text-blue-200 text-xs font-bold mb-8">
+                                        <Icon name="Info" className="h-4 w-4" />
+                                        <span>重要：労働基準法第39条について</span>
+                                    </div>
+                                    <h2 className="text-3xl md:text-5xl font-bold mb-10 leading-tight">アルバイトにも<br /><span className="text-blue-400">有給休暇</span>は法律上の権利です</h2>
+                                    <div className="space-y-8">
+                                        <div className="flex gap-6">
+                                            <div className="shrink-0 mt-1"><Icon name="CheckCircle2" className="h-7 w-7 text-blue-400" /></div>
+                                            <div>
+                                                <h4 className="font-bold text-xl mb-2 text-slate-100">雇用形態を問いません</h4>
+                                                <p className="text-slate-400 leading-relaxed text-sm md:text-base">6ヶ月継続勤務かつ8割以上の出勤があれば、アルバイト・パート等の形態にかかわらず必ず付与されます。</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex gap-6">
+                                            <div className="shrink-0 mt-1"><Icon name="CheckCircle2" className="h-7 w-7 text-blue-400" /></div>
+                                            <div>
+                                                <h4 className="font-bold text-xl mb-2 text-slate-100">年5日の義務化</h4>
+                                                <p className="text-slate-400 leading-relaxed text-sm md:text-base">2019年4月より、付与日数が10日以上の労働者には、年5日の有給休暇を確実に取得させることが企業に義務付けられています。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="bg-slate-800 p-10 rounded-[2.5rem] border border-slate-700 shadow-3xl">
+                                    <div className="flex items-center space-x-4 mb-8 text-amber-500">
+                                        <Icon name="AlertTriangle" className="h-7 w-7" />
+                                        <span className="font-bold text-lg">事業主の典型的な誤解</span>
+                                    </div>
+                                    <ul className="space-y-5 text-slate-300">
+                                        {[
+                                            { text: '「アルバイトには有給制度がない」', type: '違法' },
+                                            { text: '「シフト制だから有給は存在しない」', type: '違法' },
+                                            { text: '「就業規則に規定していない」', type: '違法' },
+                                            { text: '「人手不足なので取得させられない」', type: '違法' }
+                                        ].map((item, idx) => (
+                                            <li key={idx} className="flex justify-between items-center p-4 rounded-2xl bg-slate-700/30 border border-slate-700/50">
+                                                <span className="text-sm md:text-base">{item.text}</span>
+                                                <span className="text-red-400 font-black text-xs md:text-sm px-3 py-1 bg-red-400/10 rounded-full">{item.type}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div className="mt-10 p-5 bg-blue-900/30 rounded-2xl border border-blue-800/50 text-xs text-blue-200 leading-relaxed italic">
+                                        ※付与日数は週の勤務日数によって異なります。不明な場合は事務局または労働基準監督署へご相談ください。
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Report Form Section (New) */}
+                    <section id="report" className="py-32 bg-white">
+                        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="bg-slate-50 p-8 md:p-16 rounded-[3rem] shadow-xl border border-slate-100">
+                                <div className="text-center mb-12">
+                                    <div className="bg-blue-900 text-white w-16 h-16 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-lg shadow-blue-900/20">
+                                        <Icon name="Mail" className="h-8 w-8" />
+                                    </div>
+                                    <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">通報・相談窓口</h2>
+                                    <p className="text-slate-500 leading-relaxed max-w-lg mx-auto text-sm md:text-base">
+                                        匿名での情報提供が可能です。内容は厳重に管理され、
+                                        許可なく第三者や企業へ提供されることはありません。
+                                    </p>
+                                </div>
+
+                                {formSubmitted ? (
+                                    <div className="text-center py-20 animate-in zoom-in duration-500">
+                                        <div className="bg-green-100 text-green-700 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8">
+                                            <Icon name="CheckCircle2" className="h-12 w-12" />
+                                        </div>
+                                        <h3 className="text-3xl font-bold mb-4 text-slate-900">受付完了いたしました</h3>
+                                        <p className="text-slate-600 mb-10 text-sm md:text-base">
+                                            報告内容を精査し、法令違反の可能性が高いと判断した場合、<br />
+                                            当ネットワークより企業への是正要請または労基署への申告支援を開始いたします。
+                                        </p>
+                                        <button 
+                                            onClick={() => setFormSubmitted(false)}
+                                            className="text-blue-900 font-bold hover:underline py-2"
+                                        >
+                                            新しい報告を行う
+                                        </button>
+                                    </div>
+                                ) : (
+                                    <form onSubmit={handleSubmit} className="space-y-8">
+                                        <div className="grid md:grid-cols-2 gap-8">
+                                            <div className="space-y-3">
+                                                <label className="block text-sm font-black text-slate-700 uppercase tracking-wider">対象企業・店舗名</label>
+                                                <input type="text" required placeholder="例: ○○株式会社 ××支店" className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-blue-900/10 focus:border-blue-900 outline-none transition-all text-sm md:text-base" />
+                                            </div>
+                                            <div className="space-y-3">
+                                                <label className="block text-sm font-black text-slate-700 uppercase tracking-wider">連絡用メール（任意）</label>
+                                                <input type="email" placeholder="NLRPNからの進捗報告を希望する場合" className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-blue-900/10 focus:border-blue-900 outline-none transition-all text-sm md:text-base" />
+                                            </div>
+                                        </div>
+                                        <div className="space-y-4">
+                                            <label className="block text-sm font-black text-slate-700 uppercase tracking-wider">主な違反内容（複数選択可）</label>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                {[
+                                                    '有給休暇の存在を説明されていない',
+                                                    '有給申請が慣例的に拒否される',
+                                                    '「バイトに有給はない」との通告',
+                                                    '5日の義務化を守っていない',
+                                                    'その他労働基準法違反'
+                                                ].map((item) => (
+                                                    <label key={item} className="group flex items-center p-5 bg-white border border-slate-200 rounded-2xl cursor-pointer hover:border-blue-900 hover:shadow-md transition-all">
+                                                        <input type="checkbox" className="w-5 h-5 text-blue-900 rounded-lg border-slate-300 focus:ring-blue-900 cursor-pointer" />
+                                                        <span className="ml-4 text-xs md:text-sm font-medium text-slate-600 group-hover:text-slate-900">{item}</span>
+                                                    </label>
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <div className="space-y-3">
+                                            <label className="block text-sm font-black text-slate-700 uppercase tracking-wider">具体的な状況</label>
+                                            <textarea rows="6" required placeholder="会社側の発言、不当な扱いの経緯などを詳細にご記入ください。" className="w-full px-5 py-4 rounded-2xl border border-slate-200 focus:ring-4 focus:ring-blue-900/10 focus:border-blue-900 outline-none transition-all resize-none text-sm md:text-base"></textarea>
+                                        </div>
+                                        <div className="bg-amber-50 p-6 rounded-2xl border border-amber-100 flex gap-4">
+                                            <Icon name="AlertTriangle" className="h-6 w-6 text-amber-600 shrink-0" />
+                                            <p className="text-[10px] md:text-xs text-amber-800 leading-relaxed font-medium">
+                                                虚偽の情報提供は重大なトラブルに発展する恐れがあります。事実に即した内容を入力してください。緊急性が著しく高い事案や法的な実害が出ている場合は、最寄りの労働基準監督署への直接申告を強く推奨いたします。
+                                            </p>
+                                        </div>
+                                        <button type="submit" className="w-full bg-blue-900 text-white py-5 rounded-2xl font-black text-xl hover:bg-blue-800 transition-all shadow-xl shadow-blue-900/20 active:scale-[0.98] mt-4">
+                                            機密を保持して送信する
+                                        </button>
+                                    </form>
+                                )}
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Footer */}
+                    <footer className="bg-slate-900 text-slate-400 py-20 border-t border-slate-800">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="flex flex-col md:flex-row justify-between items-center border-b border-slate-800 pb-16 mb-16">
+                                <div className="flex items-center space-x-3 mb-10 md:mb-0">
+                                    <Icon name="Scale" className="h-8 w-8 text-slate-600" />
+                                    <div className="flex flex-col">
+                                        <span className="font-bold text-slate-200 uppercase tracking-widest text-sm leading-none">National Labor Rights Protection Network</span>
+                                        <span className="text-[10px] text-slate-600 mt-1 uppercase tracking-tighter">Promoting Fair Labor Standards Across Japan</span>
+                                    </div>
+                                </div>
+                                <div className="flex flex-wrap justify-center gap-x-12 gap-y-6 text-sm font-bold">
+                                    <a href="#" className="hover:text-white transition-colors">活動概要</a>
+                                    <a href="#" className="hover:text-white transition-colors">プライバシー</a>
+                                    <a href="#" className="hover:text-white transition-colors">免責事項</a>
+                                    <a href="#" className="hover:text-white transition-colors">申告プロセス</a>
+                                </div>
+                            </div>
+                            <div className="text-center text-[10px] md:text-xs space-y-4">
+                                <p className="leading-relaxed">
+                                    © 2026 全国労働権利保護ネットワーク (NLRPN). <br />
+                                    当組織は、労働環境の適正化および法令遵守の監視を目的とした独立した有志団体です。行政機関ではありません。
+                                </p>
+                                <p className="text-slate-600">Site powered by NLRPN IT Unit.</p>
+                            </div>
+                        </div>
                     </footer>
                 </div>
             );
